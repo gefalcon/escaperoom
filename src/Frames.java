@@ -107,23 +107,6 @@ public class Frames {
 			}
 		});
 	}
-	public void accionBotonesVentana(){
-		btn_guardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				inicio.setVisible(true);
-			}
-		});
-		btn_pistas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btn_inventario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-	}
 	public void inicializarInicio(){
 		/* Frame inicial */
 		inicio = new JFrame();

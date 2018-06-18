@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -6,6 +7,7 @@ import java.sql.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -22,7 +24,7 @@ public class Main {
 	
 	private static Connection conexion() throws SQLException, ClassNotFoundException{
 		Class.forName("com.mysql.jdbc.Driver");
-		return (DriverManager.getConnection("jdbc:mysql://localhost/escaperoom", "root", "root"));
+		return (DriverManager.getConnection("jdbc:mysql://localhost/escaperoom", "root", "123456"));
 	}
 	private static void rellenarHab(Connection con) throws SQLException{
 		Statement stm = con.createStatement();
@@ -281,6 +283,39 @@ public class Main {
 			txt.setText(txt.getText() + "\n\n" + (i + 1) + ".- " + getNombreInv(con, inv0[i].getCod_herr()));
 		}
 	}
+	private static void mostrarInventarios(Inventario[] invent){
+		JFrame inventario = new JFrame();
+		
+		inventario.setBounds(11,11,400,500);
+		inventario.setResizable(false);
+		inventario.getContentPane().setBackground(Color.DARK_GRAY);
+		inventario.getContentPane().setLayout(null);
+		
+		JTextArea txt = new JTextArea();
+		txt.setEditable(false);
+		txt.setLineWrap(true);
+		txt.setBounds(10, 11, 374, 449);
+		inventario.getContentPane().add(txt);
+		inventario.setVisible(true);
+		txt.setText("");
+		String espacio;
+		boolean enc;
+		if(invent != null){					
+			for(int i = 0 ; i < invent.length; i++){
+				enc = false;
+				if(i == 0)					
+					espacio = "";
+				else espacio = "\n";
+				for(int j = 0; j < herr.length && enc == false; j++){
+					if(herr[j].getCod_herr() == invent[i].getCod_herr()){
+						txt.setText(txt.getText() + espacio + herr[j].getNombre());
+						enc = true;
+					}							
+				}							
+			}
+		}
+		else txt.setText("Tu inventario está vacío.");
+	}
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
 		Connection con = conexion();
 		Frames window = new Frames();
@@ -331,7 +366,20 @@ public class Main {
 				else JOptionPane.showMessageDialog(window.getVentana(), "El nº introducido no es válido");
 			}
 		});
-		
+		window.getBtn_inventario().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarInventarios(inv0);
+			}
+		});
+		window.getBtn_pistas().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mostrarInventarios(inv1);
+			}
+		});
+		window.getBtn_guardar().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		window.getBtn_enviar2().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int x = pedirOpc(window.getTeclado(), inv0.length);

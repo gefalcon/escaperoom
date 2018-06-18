@@ -1,11 +1,11 @@
 
 public class Objeto {
-	private int con_obj;
+	private int cod_obj;
 	private String nombre, descrip;
 	private int cod_hab, contiene, interactua;
 	
-	public Objeto(int con_obj, String nombre, String descrip, int cod_hab, int contiene, int interactua) {
-		this.con_obj = con_obj;
+	Objeto(int cod_obj, String nombre, String descrip, int cod_hab, int contiene, int interactua) {
+		this.cod_obj = cod_obj;
 		this.nombre = nombre;
 		this.descrip = descrip;
 		this.cod_hab = cod_hab;
@@ -13,8 +13,8 @@ public class Objeto {
 		this.interactua = interactua;
 	}
 
-	public int getCon_obj() {
-		return con_obj;
+	public int getCod_obj() {
+		return cod_obj;
 	}
 
 	public String getNombre() {

@@ -3,7 +3,7 @@ public class Habitacion {
 	private int cod_hab;
 	private String nombre, url;
 	
-	public Habitacion(int cod_hab, String nombre, String url) {
+	Habitacion(int cod_hab, String nombre, String url) {
 		this.cod_hab = cod_hab;
 		this.nombre = nombre;
 		this.url = url;
